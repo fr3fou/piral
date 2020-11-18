@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"math"
+	"os"
+	"strconv"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -10,28 +12,55 @@ import (
 func main() {
 	screenWidth := int32(1920)
 	screenHeight := int32(1080)
+	if len(os.Args) < 2 {
+		panic("not enough arguments, please provide amount of primes to be generated")
+	}
+	count, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		panic(err)
+	}
 
 	log.Println("Beginning prime generation")
-	primes := findPrimes(100_000)
+	primes := findPrimes(count)
 	log.Println("Finished prime generation")
 
 	rl.SetConfigFlags(rl.FlagMsaa4xHint)
-	rl.InitWindow(screenWidth, screenHeight, "Sprime")
+	rl.InitWindow(screenWidth, screenHeight, "Piral")
 	rl.ToggleFullscreen()
 
 	i := 0
 	scale := 0.1
 	theta := 0.0
 	delta := 4
+	generating := false
+	auto := true
 	for !rl.WindowShouldClose() {
-		// scale = constrain(scale/1.0005, 1, 0.002)
 		scale += float64(rl.GetMouseWheelMove()) * 0.001
 
-		l := len(primes)
-		if i+delta <= l {
-			i += delta
-		} else {
-			i += len(primes) - i
+		if rl.IsKeyReleased(rl.KeySpace) {
+			generating = !generating
+		}
+
+		if rl.IsKeyReleased(rl.KeyR) {
+			i = 0
+			scale = 0.1
+		}
+
+		if rl.IsKeyReleased(rl.KeyZ) {
+			auto = !auto
+		}
+
+		if generating {
+			if auto {
+				scale = constrain(scale/1.0005, 1, 0.002)
+			}
+
+			l := len(primes)
+			if i+delta <= l {
+				i += delta
+			} else {
+				i += len(primes) - i
+			}
 		}
 
 		rl.BeginDrawing()
