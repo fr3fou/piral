@@ -19,7 +19,7 @@ func main() {
 	rl.InitWindow(screenWidth, screenHeight, "Sprime")
 	rl.ToggleFullscreen()
 
-	i := len(primes)
+	i := 0
 	scale := 0.1
 	theta := 0.0
 	delta := 4
