@@ -12,14 +12,14 @@ func main() {
 	screenHeight := int32(1080)
 
 	log.Println("Beginning prime generation")
-	primes := findPrimes(10000)
+	primes := findPrimes(100_000)
 	log.Println("Finished prime generation")
 
 	rl.SetConfigFlags(rl.FlagMsaa4xHint)
 	rl.InitWindow(screenWidth, screenHeight, "Sprime")
 	rl.ToggleFullscreen()
 
-	i := 0
+	i := len(primes)
 	scale := 0.1
 	theta := 0.0
 	delta := 4
