@@ -225,11 +225,3 @@ func scale(value float64, minFrom float64, maxFrom float64, minTo float64, maxTo
 func constrain(n, high, low float64) float64 {
 	return math.Max(math.Min(n, high), low)
 }
-
-func findNums(n int) []int {
-	v := make([]int, n)
-	for i := 0; i < n; i++ {
-		v[i] = i
-	}
-	return v
-}

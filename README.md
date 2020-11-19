@@ -21,6 +21,12 @@ $ go run main.go
 
 You can scroll to zoom in and out
 
+## TODO
+
+- [ ] Optimize performance when rendering high amount of numbers
+- [ ] Sliders for adjusting speed of rotation and zooming after launching
+- [ ] Reimplement Eratosthenes' Sieve to be more effecient
+
 ## References
 
 - <https://www.youtube.com/watch?v=EK32jo7i5LQ>
