@@ -7,7 +7,7 @@ A Visualisation of an Archimedean Spiral Using Prime Numbers
 ## Usage
 
 ```bash
-$ go run main.go 100000 # Amount of primes to be generated
+$ go run main.go
 ```
 
 ## Keybinds

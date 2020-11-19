@@ -1,32 +1,74 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"math"
-	"os"
-	"strconv"
 
+	"github.com/gen2brain/raylib-go/raygui"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 func main() {
-	screenWidth := int32(1920)
-	screenHeight := int32(1080)
-	if len(os.Args) < 2 {
-		panic("not enough arguments, please provide amount of primes to be generated")
+	rl.InitWindow(300, 125, "Piral Launcher")
+
+	fullscreen := false
+
+	comboActive := 0
+	res := [][]int32{
+		{1920, 1080},
+		{1366, 768},
+		{800, 600},
 	}
-	count, err := strconv.Atoi(os.Args[1])
-	if err != nil {
-		panic(err)
+	comboText := []string{"1920x1080", "1366x768", "800x600"}
+
+	n := float32(10_000)
+
+	raygui.LoadGuiStyle("zahnrad.style")
+	rl.SetTargetFPS(60)
+
+	start := false
+	primes := []int{}
+
+	for !rl.WindowShouldClose() {
+		rl.BeginDrawing()
+		rl.ClearBackground(raygui.BackgroundColor())
+
+		if start {
+
+			rl.DrawText("Loading...", (300-rl.MeasureText("Loading...", 20))/2, (125-20)/2, 20, raygui.TextColor())
+			rl.EndDrawing()
+			primes = findPrimes(int(n))
+			rl.CloseWindow()
+			break
+		} else {
+			raygui.Label(rl.NewRectangle(40, 25, 0, 20), "Fullscreen")
+			fullscreen = raygui.CheckBox(rl.NewRectangle(20, 25, 20, 20), fullscreen)
+
+			raygui.Label(rl.NewRectangle(125, 125-20-20, 0, 20), fmt.Sprintf("%d primes", int(n)))
+			n = raygui.SliderBar(rl.NewRectangle(20, 125-20-20, 100, 20), n, 10_000, 1_000_000)
+
+			comboActive = raygui.ComboBox(rl.NewRectangle(300-100-20-30, 25, 100, 20), comboText, comboActive)
+
+			start = raygui.Button(rl.NewRectangle(300-40-20+1, 125-20-20, 40, 20), "Start!")
+		}
+
+		rl.EndDrawing()
 	}
 
-	log.Println("Beginning prime generation")
-	primes := findPrimes(count)
-	log.Println("Finished prime generation")
+	if start {
+		piral(res[comboActive][0], res[comboActive][1], fullscreen, primes)
+	}
+}
+
+func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 
 	rl.SetConfigFlags(rl.FlagMsaa4xHint)
+
 	rl.InitWindow(screenWidth, screenHeight, "Piral")
-	rl.ToggleFullscreen()
+	if fullscreen {
+		rl.MaximizeWindow()
+		rl.ToggleFullscreen()
+	}
 
 	i := 0
 	scale := 0.1
