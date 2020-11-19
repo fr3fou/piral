@@ -98,7 +98,7 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 			auto = !auto
 		}
 
-		if rl.IsKeyReleased(rl.KeyZ) {
+		if rl.IsKeyReleased(rl.KeyX) {
 			rotating = !rotating
 		}
 
