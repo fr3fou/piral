@@ -12,19 +12,19 @@ $ go run main.go
 
 ## Keybinds
 
-|       Key        |          Action          |
-| :--------------: | :----------------------: |
-| <kbd>Space</kbd> |    Toggle Generation     |
-|   <kbd>s</kbd>   |     Skip Generation      |
-|   <kbd>r</kbd>   |          Reset           |
-|   <kbd>z</kbd>   | Toggle automatic zooming |
-|   <kbd>x</kbd>   |     Toggle rotation      |
+|       Key        |                                    Action                                    |
+| :--------------: | :--------------------------------------------------------------------------: |
+| <kbd>Space</kbd> |                              Toggle Generation                               |
+|   <kbd>s</kbd>   |                               Skip Generation                                |
+|   <kbd>r</kbd>   |                                    Reset                                     |
+|   <kbd>z</kbd>   |                           Toggle automatic zooming                           |
+|   <kbd>x</kbd>   | Toggle rotation (can cause performance issues when using a high prime count) |
 
 You can scroll to zoom in and out
 
 ## TODO
 
-- [ ] Optimize performance when rendering high amount of numbers
+- [ ] Optimize performance when rendering a high prime count
 - [ ] Sliders for adjusting speed of rotation and zooming after launching
 - [ ] Reimplement Eratosthenes' Sieve to be more effecient
 - [ ] Zooming in under cursor (would require changing the origin of rendering)
