@@ -32,6 +32,8 @@ You can scroll to zoom in and out
 - [ ] Sliders for adjusting speed of rotation and zooming after launching
 - [ ] Reimplement Eratosthenes' Sieve to be more effecient
 - [ ] Zooming in under cursor (would require changing the origin of rendering)
+- [ ] Don't use `rl.DrawCircle`
+- [ ] Stop zooming out earlier (compute offset from edges of the spiral to the borders of the screen)
 - [ ] Render to video (?)
 
 ## References
