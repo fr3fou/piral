@@ -4,6 +4,8 @@ A Visualisation of an Archimedean Spiral Using Prime Numbers
 
 ![](demo.png)
 
+![](demo_2.png)
+
 ## Usage
 
 ```bash
