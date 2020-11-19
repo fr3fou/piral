@@ -73,7 +73,10 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 	defer rl.UnloadTexture(circle)
 
 	i := 0
+
 	scale := 0.1
+	minScale := 0.0005
+
 	theta := 0.0
 	delta := 4
 
@@ -82,7 +85,11 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 	rotating := true
 
 	for !rl.WindowShouldClose() {
-		scale = constrain((float64(rl.GetMouseWheelMove())*0.0005)+scale, 1, 0.0005)
+		if rl.IsKeyDown(rl.KeyLeftControl) {
+			scale = constrain((float64(rl.GetMouseWheelMove())*0.0001)+scale, 1, minScale)
+		} else {
+			scale = constrain((float64(rl.GetMouseWheelMove())*0.0005)+scale, 1, minScale)
+		}
 
 		if rl.IsKeyReleased(rl.KeyR) {
 			i = 0
@@ -107,7 +114,7 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 
 		if progressing {
 			if auto {
-				scale = constrain(scale/1.001, 1, 0.0005)
+				scale = constrain(scale/1.001, 1, minScale)
 			}
 
 			l := len(primes)

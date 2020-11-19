@@ -24,7 +24,7 @@ $ go run main.go
 |   <kbd>z</kbd>   |                           Toggle automatic zooming                           |
 |   <kbd>x</kbd>   | Toggle rotation (can cause performance issues when using a high prime count) |
 
-You can scroll to zoom in and out
+You can scroll to zoom in and out. Hold <kbd>Ctrl</kbd> to be more precise.
 
 ## TODO
 
