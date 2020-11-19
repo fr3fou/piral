@@ -16,5 +16,5 @@ jobs:
       - name: Upload zip
         uses: actions/upload-artifact@v2
         with:
-          name: piral-linux.zip
+          name: piral-linux
           path: piral-out
