@@ -1,2 +1,3 @@
 *.exe
-piral/
+piral-out/
+*.zip
