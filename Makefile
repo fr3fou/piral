@@ -1,5 +1,5 @@
-MODULE_NAME=sprime
-OUTPUT_DIR=sprime
+MODULE_NAME=piral
+OUTPUT_DIR=piral-out
 
 ifeq ($(OS), Windows_NT)
 	EXECUTABLE=$(MODULE_NAME).exe

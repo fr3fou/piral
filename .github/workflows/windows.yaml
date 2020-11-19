@@ -1,0 +1,26 @@
+name: Build for Windows
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: msys2/setup-msys2@v2
+        with:
+          path-type: inherit
+          update: true
+          install: base-devel mingw-w64-x86_64-toolchain git
+
+      - name: Build
+        run: make
+
+      - name: Upload zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: piral-windows.zip
+          path: piral-out
