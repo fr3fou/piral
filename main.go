@@ -104,7 +104,7 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 
 		if progressing {
 			if auto {
-				scale = constrain(scale/1.0005, 1, 0.002)
+				scale = constrain(scale/1.0005, 1, 0.001)
 			}
 
 			l := len(primes)
@@ -145,7 +145,9 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 			vec.X = float32(float64(x)*cos - float64(y)*sin)
 			vec.Y = float32(float64(x)*sin + float64(y)*cos)
 
-			rl.DrawCircleV(rl.Vector2Add(vec, origin), 2, rl.SkyBlue)
+			if vec.X >= -float32(screenHeight) && vec.X <= float32(screenWidth) && vec.Y >= -float32(screenWidth) && vec.Y <= float32(screenHeight) {
+				rl.DrawCircleV(rl.Vector2Add(vec, origin), 2, rl.SkyBlue)
+			}
 		}
 
 		rl.EndDrawing()
