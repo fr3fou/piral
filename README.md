@@ -15,6 +15,7 @@ $ go run main.go
 |       Key        |          Action          |
 | :--------------: | :----------------------: |
 | <kbd>Space</kbd> |    Toggle Generation     |
+|   <kbd>s</kbd>   |     Skip Generation      |
 |   <kbd>r</kbd>   |          Reset           |
 |   <kbd>z</kbd>   | Toggle automatic zooming |
 |   <kbd>x</kbd>   |     Toggle rotation      |
@@ -26,6 +27,8 @@ You can scroll to zoom in and out
 - [ ] Optimize performance when rendering high amount of numbers
 - [ ] Sliders for adjusting speed of rotation and zooming after launching
 - [ ] Reimplement Eratosthenes' Sieve to be more effecient
+- [ ] Zooming in under cursor (would require changing the origin of rendering)
+- [ ] Render to video (?)
 
 ## References
 

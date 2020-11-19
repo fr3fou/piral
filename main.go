@@ -11,7 +11,7 @@ import (
 func main() {
 	rl.InitWindow(300, 125, "Piral Launcher")
 
-	fullscreen := false
+	fullscreen := true
 
 	comboActive := 0
 	res := [][]int32{
@@ -34,7 +34,6 @@ func main() {
 		rl.ClearBackground(raygui.BackgroundColor())
 
 		if start {
-
 			rl.DrawText("Loading...", (300-rl.MeasureText("Loading...", 20))/2, (125-20)/2, 20, raygui.TextColor())
 			rl.EndDrawing()
 			primes = findPrimes(int(n))
@@ -75,20 +74,24 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 	theta := 0.0
 	delta := 4
 
-	generating := false
+	progressing := false
 	auto := true
 	rotating := true
 
 	for !rl.WindowShouldClose() {
 		scale += float64(rl.GetMouseWheelMove()) * 0.001
 
-		if rl.IsKeyReleased(rl.KeySpace) {
-			generating = !generating
-		}
-
 		if rl.IsKeyReleased(rl.KeyR) {
 			i = 0
 			scale = 0.1
+		}
+
+		if rl.IsKeyReleased(rl.KeyS) {
+			i = len(primes)
+		}
+
+		if rl.IsKeyReleased(rl.KeySpace) {
+			progressing = !progressing
 		}
 
 		if rl.IsKeyReleased(rl.KeyZ) {
@@ -99,7 +102,7 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 			rotating = !rotating
 		}
 
-		if generating {
+		if progressing {
 			if auto {
 				scale = constrain(scale/1.0005, 1, 0.002)
 			}
