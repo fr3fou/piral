@@ -1,4 +1,4 @@
-module github.com/fr3fou/sprime
+module github.com/fr3fou/piral
 
 go 1.14
 

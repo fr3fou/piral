@@ -74,8 +74,11 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 	scale := 0.1
 	theta := 0.0
 	delta := 4
+
 	generating := false
 	auto := true
+	rotating := true
+
 	for !rl.WindowShouldClose() {
 		scale += float64(rl.GetMouseWheelMove()) * 0.001
 
@@ -92,6 +95,10 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 			auto = !auto
 		}
 
+		if rl.IsKeyReleased(rl.KeyZ) {
+			rotating = !rotating
+		}
+
 		if generating {
 			if auto {
 				scale = constrain(scale/1.0005, 1, 0.002)
@@ -103,6 +110,10 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 			} else {
 				i += len(primes) - i
 			}
+		}
+
+		if rotating {
+			theta += 0.001
 		}
 
 		rl.BeginDrawing()
@@ -133,8 +144,6 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 
 			rl.DrawCircleV(rl.Vector2Add(vec, origin), 2, rl.SkyBlue)
 		}
-
-		theta += 0.001
 
 		rl.EndDrawing()
 	}

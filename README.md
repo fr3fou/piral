@@ -17,6 +17,7 @@ $ go run main.go
 | <kbd>Space</kbd> |    Toggle Generation     |
 |   <kbd>r</kbd>   |          Reset           |
 |   <kbd>z</kbd>   | Toggle automatic zooming |
+|   <kbd>x</kbd>   |     Toggle rotation      |
 
 You can scroll to zoom in and out
 
