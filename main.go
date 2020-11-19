@@ -23,7 +23,8 @@ func main() {
 
 	n := float32(10_000)
 
-	raygui.LoadGuiStyle("zahnrad.style")
+	raygui.LoadGuiStyle("assets/zahnrad.style")
+
 	rl.SetTargetFPS(60)
 
 	start := false
@@ -60,7 +61,6 @@ func main() {
 }
 
 func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
-
 	rl.SetConfigFlags(rl.FlagMsaa4xHint)
 
 	rl.InitWindow(screenWidth, screenHeight, "Piral")
@@ -69,17 +69,20 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 		rl.ToggleFullscreen()
 	}
 
+	circle := rl.LoadTexture("assets/circle.png")
+	defer rl.UnloadTexture(circle)
+
 	i := 0
 	scale := 0.1
 	theta := 0.0
 	delta := 4
 
-	progressing := false
+	progressing := true
 	auto := true
 	rotating := true
 
 	for !rl.WindowShouldClose() {
-		scale += float64(rl.GetMouseWheelMove()) * 0.001
+		scale = constrain((float64(rl.GetMouseWheelMove())*0.0005)+scale, 1, 0.0005)
 
 		if rl.IsKeyReleased(rl.KeyR) {
 			i = 0
@@ -104,7 +107,7 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 
 		if progressing {
 			if auto {
-				scale = constrain(scale/1.0005, 1, 0.001)
+				scale = constrain(scale/1.001, 1, 0.0005)
 			}
 
 			l := len(primes)
@@ -126,6 +129,7 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 			p := float64(prime)
 			sin, cos := math.Sincos(p)
 
+			// Scale / zoom
 			vec := rl.Vector2Scale(
 				rl.Vector2{
 					X: float32(p * cos),
@@ -134,19 +138,26 @@ func piral(screenWidth, screenHeight int32, fullscreen bool, primes []int) {
 				float32(scale),
 			)
 
+			// Translate origin to center of screen
 			origin := rl.Vector2{
 				X: float32(screenWidth / 2),
 				Y: float32(screenHeight / 2),
 			}
 
+			// Rotate about center
 			x, y := vec.X, vec.Y
 			sin, cos = math.Sincos(theta)
-
 			vec.X = float32(float64(x)*cos - float64(y)*sin)
 			vec.Y = float32(float64(x)*sin + float64(y)*cos)
 
+			// Don't render if it's off-screen
 			if vec.X >= -float32(screenHeight) && vec.X <= float32(screenWidth) && vec.Y >= -float32(screenWidth) && vec.Y <= float32(screenHeight) {
-				rl.DrawCircleV(rl.Vector2Add(vec, origin), 2, rl.SkyBlue)
+				// Offset from top-left corner of Texture
+				pos := rl.Vector2Add(
+					rl.Vector2Add(vec, origin),
+					rl.NewVector2(float32(circle.Width/2), float32(circle.Height/2)),
+				)
+				rl.DrawTextureEx(circle, pos, 0, 1, rl.SkyBlue)
 			}
 		}
 

@@ -21,7 +21,7 @@ static-build:
 bundle:
 	mkdir $(OUTPUT_DIR)
 	mv $(EXECUTABLE) $(OUTPUT_DIR)
-	cp zahnrad.style $(OUTPUT_DIR)
+	cp -r assets/ $(OUTPUT_DIR)
 
 clean:
 ifeq ($(OUTPUT_EXISTS), 1)
