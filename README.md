@@ -2,6 +2,8 @@
 
 A Visualisation of an Archimedean Spiral Using Prime Numbers
 
+[Video demo](https://www.youtube.com/watch?v=ZExHfN8I9BQ)
+
 ![](demo.png)
 
 ![](demo_2.png)
