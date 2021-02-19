@@ -2,7 +2,7 @@
 
 A Visualisation of an Archimedean Spiral Using Prime Numbers
 
-[Video demo](https://www.youtube.com/watch?v=ZExHfN8I9BQ)
+[![Piral Demo](http://i3.ytimg.com/vi/ZExHfN8I9BQ/maxresdefault.jpg)](http://www.youtube.com/watch?v=ZExHfN8I9BQ "Piral Demo")
 
 ![](demo.png)
 
